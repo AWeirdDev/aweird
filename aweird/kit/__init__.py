@@ -1,4 +1,4 @@
-from .colors import Colors
-from .detector import detect_hidden, add_at, Routine
+from .colors import *
+from .detector import *
 
 # undefined
