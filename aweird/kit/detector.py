@@ -1,5 +1,6 @@
 from .colors import bcolors
 import requests # pip install requests
+import asnycio # pip install asyncio
 import time
 from threading import Thread
 
@@ -62,7 +63,7 @@ class Routine(object):
     self.urls = []
     self.URLfunc = []
 
-  def emit(self, event: str, *args, **send: any):
+  def emit(self, event: str, async_mode: bool=False,*args, **send: any):
     """Trigger an event
     =======================
     Emit an event
@@ -75,14 +76,21 @@ class Routine(object):
     def on_EVENT():
       ...
     """
-    print(send)
     if not event in self.events:
       return None
+    
     func = self.events[event]
+    
     if send:
-      func(**send)
+      if async_mode:
+        asyncio.run(func(**send))
+      else:
+        func(**send)
     else:
-      func()
+      if async_mode:
+        asyncio.run(func())
+      else:
+        func()
   
   def event(self, func):
     """
