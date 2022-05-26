@@ -1,6 +1,6 @@
 from .colors import bcolors
 import requests # pip install requests
-import asnycio # pip install asyncio
+import asyncio # pip install asyncio
 import time
 from threading import Thread
 
