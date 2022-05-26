@@ -10,7 +10,7 @@ def detect_format(content):
   Detects [markdown](link) format
   Returns `True` if detected
   """
-  print("ALL: " + str(len(content)))
+  #print("ALL: " + str(len(content)))
   _list = [""]
   main = ["[", "](", ")"]
   now = 1
@@ -102,7 +102,7 @@ class Routine(object):
     ...
     """
     name = func.__name__.replace("on_", "")
-    print(name)
+    #print(name)
     self.events[name] = func
     return func
   
