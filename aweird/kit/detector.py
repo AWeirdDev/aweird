@@ -111,7 +111,7 @@ class Routine(object):
     return func
   
   def error(self, error_type) -> callable:
-    def decorator(func) -> callbale:
+    def decorator(func):
       self.errors[error_type] = func
       return func
   
