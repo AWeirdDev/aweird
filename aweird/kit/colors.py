@@ -1,5 +1,5 @@
 
-class Colors:
+class bcolors:
     header = '\033[95m'
     okblue = '\033[94m'
     okcyan = '\033[96m'
@@ -13,7 +13,7 @@ class Colors:
     Colors for terminal.
     Example Usage:
     ```py
-    from aweird.kit import Colors
-    print(Colors.okblue + "this is blue" + Colors.end)
+    from aweird.kit import bcolors
+    print(bcolors.okblue + "this is blue" + bcolors.end)
     ```
     """
