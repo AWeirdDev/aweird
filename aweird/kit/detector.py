@@ -114,6 +114,7 @@ class Routine(object):
     def decorator(func):
       self.errors[error_type] = func
       return func
+    return decorator
   
 
   def routine(self, func) -> callable:
