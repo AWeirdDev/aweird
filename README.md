@@ -33,7 +33,8 @@ print(result)
 Add Something in the text:
 ```py
 from aweird.kit import add_at
-result = add_at("I'm a bad person", "not ", 5)
+result = add_at("I'm a bad person", "not ", 6)
+print(result)
 ```
 > And the result will be: `I'm not a bad person`
 
