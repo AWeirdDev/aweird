@@ -82,7 +82,7 @@ routine = Routine()
 def __RandomWebsite():
   print("Will you print this?")
 
-@routine.error(HostError):
+@routine.error(HostError)
 def _hostError():
   print("Something went wrong!")
 ```
