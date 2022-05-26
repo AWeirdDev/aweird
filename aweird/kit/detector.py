@@ -3,6 +3,8 @@ import requests # pip install requests
 import asyncio # pip install asyncio
 import time
 from threading import Thread
+from .errors import HostError
+
 
 def detect_format(content):
   """
@@ -47,6 +49,7 @@ def add_at(content: str, new: str, at: int):
     now += 1
   return "".join(main)
 
+
 class Routine(object):
   def __init__(self):
     """AWeirdKit Routine Manager
@@ -62,6 +65,7 @@ class Routine(object):
     self.events = {}
     self.urls = []
     self.URLfunc = []
+    self.errors = {}
 
   def emit(self, event: str, async_mode: bool=False,*args, **send: any):
     """Trigger an event
@@ -106,6 +110,11 @@ class Routine(object):
     self.events[name] = func
     return func
   
+  def error(self, error_type) -> callable:
+    def decorator(func) -> callbale:
+      self.errors[error_type] = func
+      return func
+  
 
   def routine(self, func) -> callable:
     """
@@ -117,6 +126,12 @@ class Routine(object):
     """
     self.routes.append(func)
     return func
+  
+  def _hosterror(self, url: str):
+    if HostError in self.errors:
+      self.errors[HostError]()
+    else:
+      print(bcolors.fail + f"Cannot [GET] URL: {url}" + bcolors.end)
 
   def start(self, seconds: float=0, forever: bool=False) -> None:
     """Start the routine."""
@@ -128,7 +143,11 @@ class Routine(object):
       while not done:
         now = 0
         for func in self.URLfunc:
-          r = requests.get(self.urls[now])
+          try:
+            r = requests.get(self.urls[now])
+            r.raise_for_status()
+          except:
+            return self._hosterror(self.urls[now])
           func(r)
           now += 1
           time.sleep(seconds)
