@@ -73,7 +73,20 @@ For discord bot hosting:
 def hosted(response) -> None:
   print("I just hosted discord.com/jobs!")
 ```
+To receive hosting errors:
+```py
+from .aweirdkit import Routine, HostError
+routine = Routine()
 
+@routine.get("???.com")
+def __RandomWebsite():
+  print("Will you print this?")
+
+@routine.error(HostError):
+def _hostError():
+  print("Something went wrong!")
+```
+> Info: If the `@routine.error` was not set, by default it just prints a failing message.
 
 ## Events
 If you want to trigger events, try this out:
