@@ -121,12 +121,14 @@ class Routine(object):
   def start(self, seconds: float=0, forever: bool=False) -> None:
     """Start the routine."""
     done = False
+    if not self.func and not self.URLfunc:
+      print(bcolors.warning + f"WARNING: You are now starting an infinite loop with NO TASKS. You will not be able to use the console unless you thread this program." + bcolors.end)
     def runner():
       while not done:
         now = 0
         for func in self.URLfunc:
-          requests.get(self.urls[now])
-          func()
+          r = requests.get(self.urls[now])
+          func(r)
           now += 1
           time.sleep(seconds)
     Thread(target=runner).start()
