@@ -1,5 +1,6 @@
 from .colors import *
 from .detector import *
+from .errors import *
 
 """
 # AWeirdKit
